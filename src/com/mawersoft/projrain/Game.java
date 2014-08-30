@@ -10,8 +10,11 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.mawersoft.projrain.entity.mob.Player;
 import com.mawersoft.projrain.graphics.Screen;
 import com.mawersoft.projrain.input.Keyboard;
+import com.mawersoft.projrain.level.Level;
+import com.mawersoft.projrain.level.RandomLevel;
 
 public class Game extends Canvas implements Runnable {
 	/**
@@ -22,13 +25,15 @@ public class Game extends Canvas implements Runnable {
 	public static int width = 300;
 	public static int height = width / 16 * 9;
 	public static int scale = 3;
-	public static String ver = "0.0.2";
+	public static String ver = "0.0.3";
 	//public static String title = "ProjRain";
 	public static String title = "Project Rain "+ver;
 	
 	private Thread thread;
 	private JFrame frame;
 	private Keyboard key;
+	private Level level;
+	private Player player;
 	private boolean running = false;
 	private Screen screen;
 	
@@ -43,6 +48,8 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		
 		key = new Keyboard();
+		level = new RandomLevel(64, 64);
+		player = new Player(key);
 		addKeyListener(key);
 	}
 	
@@ -98,15 +105,12 @@ public class Game extends Canvas implements Runnable {
 		stop();
 	}
 	
-	int x = 0, y = 0;
 	
 	public void tick() {
 		//In the tutorial, tick = update
 		key.update();
-		if (key.up) y++;
-		if (key.down) y--;
-		if (key.left) x++;
-		if (key.right) x--;
+		player.update();
+		
 	}
 	
 	public void render() {
@@ -116,7 +120,10 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		screen.clear();
-		screen.render(x, y);
+		int xScroll = player.x - screen.width / 2;
+		int yScroll = player.y - screen.height / 2;
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

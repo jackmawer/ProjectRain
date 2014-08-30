@@ -3,9 +3,9 @@ package com.mawersoft.projrain.level.tile;
 import com.mawersoft.projrain.graphics.Screen;
 import com.mawersoft.projrain.graphics.Sprite;
 
-public class GrassTile extends Tile {
+public class RockTile extends Tile {
 
-	public GrassTile(Sprite sprite) {
+	public RockTile(Sprite sprite) {
 		super(sprite);
 	}
 	
@@ -13,6 +13,8 @@ public class GrassTile extends Tile {
 		screen.renderTile(x << 4, y << 4, this);
 	}
 	
-	
-	
+	public boolean solid() {
+		return true;// By default, pass through tiles
+	}
+
 }
