@@ -8,6 +8,8 @@ public class Sprite {
 	private SpriteSheet sheet;
 	
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);//This is how you create a sprite! (size of sprite, x pos of sprite on sheet, y pos on sheet, sheet)
+	public static Sprite brickwall = new Sprite(16, 1, 1, SpriteSheet.tiles);
+	public static Sprite stone = new Sprite(16, 0, 1, SpriteSheet.tiles);
 	public static Sprite flower = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite rock = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0xA30000); //Void tile, might replace with a texture
@@ -16,6 +18,18 @@ public class Sprite {
 	//public static Sprite player1 = new Sprite(16, 1, 10, SpriteSheet.tiles);
 	//public static Sprite player2 = new Sprite(16, 0, 11, SpriteSheet.tiles);
 	//public static Sprite player3 = new Sprite(16, 1, 11, SpriteSheet.tiles);
+	
+	//Spawn level sprites
+	public static Sprite spawn_grass = new Sprite(16, 0, 0, SpriteSheet.spawn_level);
+	public static Sprite spawn_debug = new Sprite(16, 1, 0, SpriteSheet.spawn_level);
+	public static Sprite spawn_flower = new Sprite(16, 2, 0, SpriteSheet.spawn_level);
+	public static Sprite spawn_stone = new Sprite(16, 0, 1, SpriteSheet.spawn_level);
+	public static Sprite spawn_brick = new Sprite(16, 1, 1, SpriteSheet.spawn_level);
+	public static Sprite spawn_water = new Sprite(16, 2, 1, SpriteSheet.spawn_level);
+	public static Sprite spawn_rock = new Sprite(16, 0, 2, SpriteSheet.spawn_level);
+	public static Sprite spawn_wood = new Sprite(16, 1, 2, SpriteSheet.spawn_level);
+	
+	//Player sprites
 	
 	public static Sprite player_forward = new Sprite(32, 0, 5, SpriteSheet.tiles); //This is the 5th sprite down when dealing with 32
 	public static Sprite player_back = new Sprite(32, 2, 5, SpriteSheet.tiles); //This is the 5th sprite down when dealing with 32

@@ -6,18 +6,21 @@ import com.mawersoft.projrain.level.tile.Tile;
 public class Level {
 	
 	protected int width, height;
+	protected int[] tilesInt;
 	protected int[] tiles;
+	public static Level spawn = new SpawnLevel("/levels/spawn.png");
 	
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
-		tiles = new int[width * height];
+		tilesInt = new int[width * height];
 		generateLevel();
 		
 	}
 	
 	public Level(String path) {
 		loadLevel(path);
+		generateLevel();
 	}
 
 	protected void generateLevel() {
@@ -45,14 +48,23 @@ public class Level {
 			}
 		}
 	}
+
 	
+	// Grass = 0xFF00FF00
+    // Flower = 0xFFFFFF00
+	// Rock = 0xFFDFDF00
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-		if (tiles[x+y*width] == 0) return Tile.grass;
-		if (tiles[x+y*width] == 1) return Tile.flower;
-		if (tiles[x+y*width] == 2) return Tile.rock;
-		//return Tile.voidTile; // Ugh, make it a bit more interesting!
-		return Tile.grass;
+		
+		if (tiles[x+y*width] == Tile.col_spawn_wood) return Tile.spawn_wood;
+		if (tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
+		if (tiles[x+y*width] == Tile.col_spawn_debug) return Tile.spawn_debug;
+		if (tiles[x+y*width] == Tile.col_spawn_brick) return Tile.spawn_brick;
+		if (tiles[x+y*width] == Tile.col_spawn_flower) return Tile.spawn_flower;
+		if (tiles[x+y*width] == Tile.col_spawn_rock) return Tile.spawn_rock;
+		if (tiles[x+y*width] == Tile.col_spawn_stone) return Tile.spawn_stone;
+		if (tiles[x+y*width] == Tile.col_spawn_water) return Tile.spawn_water;
+		return Tile.spawn_debug;
 	}
 	
 }

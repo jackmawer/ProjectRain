@@ -15,6 +15,8 @@ import com.mawersoft.projrain.graphics.Screen;
 import com.mawersoft.projrain.input.Keyboard;
 import com.mawersoft.projrain.level.Level;
 import com.mawersoft.projrain.level.RandomLevel;
+import com.mawersoft.projrain.level.SpawnLevel;
+import com.mawersoft.projrain.level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable {
 	/**
@@ -25,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 	public static int width = 300;
 	public static int height = width / 16 * 9;
 	public static int scale = 3;
-	public static String ver = "0.0.3";
+	public static String ver = "0.0.4";
 	//public static String title = "ProjRain";
 	public static String title = "Project Rain "+ver;
 	
@@ -48,8 +50,11 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		
 		key = new Keyboard();
-		level = new RandomLevel(64, 64);
-		player = new Player(key);
+		//level = new RandomLevel(64, 64);
+		level = Level.spawn;
+		TileCoordinate playerSpawn = new TileCoordinate(20, 66);
+		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
+		player.init(level);
 		addKeyListener(key);
 	}
 	
