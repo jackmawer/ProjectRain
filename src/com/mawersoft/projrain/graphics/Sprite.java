@@ -48,6 +48,11 @@ public class Sprite {
 	public static Sprite player_back_1 = new Sprite(32, 2, 6, SpriteSheet.tiles);
 	public static Sprite player_back_2 = new Sprite(32, 2, 7, SpriteSheet.tiles);
 	
+	
+	//Projectile sprites
+	public static Sprite projectile_wizard = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
+	
+	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
 		pixels = new int[SIZE * SIZE];

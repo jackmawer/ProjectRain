@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import com.mawersoft.projrain.entity.mob.Player;
 import com.mawersoft.projrain.graphics.Screen;
 import com.mawersoft.projrain.input.Keyboard;
+import com.mawersoft.projrain.input.Mouse;
 import com.mawersoft.projrain.level.Level;
 import com.mawersoft.projrain.level.RandomLevel;
 import com.mawersoft.projrain.level.SpawnLevel;
@@ -24,12 +25,14 @@ public class Game extends Canvas implements Runnable {
 	 */
 	private static final long serialVersionUID = 1L;
 	//
-	public static int width = 300;
-	public static int height = width / 16 * 9;
-	public static int scale = 3;
-	public static String ver = "0.0.4";
+	private static int width = 300;
+	private static int height = width / 16 * 9;
+	private static int scale = 3;
+	public static String ver = "0.0.5";
 	//public static String title = "ProjRain";
 	public static String title = "Project Rain "+ver;
+	public int currentFPS;
+	public int currentTPS;
 	
 	private Thread thread;
 	private JFrame frame;
@@ -56,6 +59,18 @@ public class Game extends Canvas implements Runnable {
 		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
 		player.init(level);
 		addKeyListener(key);
+		
+		Mouse mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+	}
+	
+	public static int getWindowWidth() {
+		return width * scale;
+	}
+	
+	public static int getWindowHeight() {
+		return height * scale;
 	}
 	
 	//
@@ -103,6 +118,8 @@ public class Game extends Canvas implements Runnable {
 				timer += 1000;
 				//System.out.println(ticks + "Ticks " + frames + " FPS"); //Print info to console if needed.
 				frame.setTitle(title + "  |  "  + ticks + "TPS " + frames + " FPS");
+				currentFPS = frames;
+				currentTPS = ticks;
 				ticks = 0;
 				frames = 0;
 			}
@@ -115,6 +132,7 @@ public class Game extends Canvas implements Runnable {
 		//In the tutorial, tick = update
 		key.update();
 		player.update();
+		level.update();
 		
 	}
 	
@@ -139,6 +157,17 @@ public class Game extends Canvas implements Runnable {
 		//g.setColor(Color.BLACK);//Testing only
 		//g.fillRect(0, 0, getWidth(), getHeight() );//Testing only
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64); // Don't need it
+		g.drawString("Project Rain by Jack Mawer, Version " + ver, 5, 10);
+		g.drawString("CurrentMouseButton: " + Mouse.getB(), 5, 20);
+		g.drawString("MouseX: " + Mouse.getX() + " MouseY:" +Mouse.getY(), 5, 30);
+		//g.drawString("PlayerX: " +  + " PlayerY: " + , 5, 40); // Broken...
+		g.drawString("TPS: " + currentTPS + " FPS: " + currentFPS, 5, 40);
+		if (currentFPS >= 60) g.drawString("Your FPS is great!", 5, 50);
+		if (currentFPS >= 30 && currentFPS < 60) g.drawString("Your FPS is good", 5, 50);
+		if (currentFPS >= 10 && currentFPS < 30) g.drawString("Your FPS is bad...", 5, 50);
+		if (currentFPS >= 1 && currentFPS < 10) g.drawString("Your FPS is terrible!", 5, 50);
+		
 		g.dispose();
 		bs.show();//If using testing code, disable me
 	}

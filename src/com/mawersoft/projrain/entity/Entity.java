@@ -7,7 +7,7 @@ import com.mawersoft.projrain.level.Level;
 
 public abstract class Entity {
 	
-	public int x, y;
+	public int x,y;
 	public boolean removed = false;
 	protected Level level;
 	protected final Random random = new Random();
