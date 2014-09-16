@@ -73,17 +73,16 @@ public class Game extends Canvas implements Runnable {
 		return height * scale;
 	}
 	
-	//
-	
 	public synchronized void start() {
-		System.out.println("Hello!");
+		System.out.println("Initializing Game!");
 		running = true;
 		thread = new Thread(this, "Display");
 		thread.start();//Start the main thread
+        System.out.println("Main Game Loop Has Begun");
 	}
 	
 	public synchronized void stop() {
-		System.out.println("Goodbye!");
+		System.out.println("Game loop has ended!");
 		running = false;
 		try {
 			thread.join();//Stop the threads
@@ -154,16 +153,18 @@ public class Game extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		//Graphics!
-		//g.setColor(Color.BLACK);//Testing only
+		g.setColor(Color.BLUE);//Testing only
 		//g.fillRect(0, 0, getWidth(), getHeight() );//Testing only
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64); // Don't need it
-		g.drawString("Project Rain by Jack Mawer, Version " + ver, 5, 10);
+		g.drawString("Project Rain, Version " + ver, 5, 10);
 		g.drawString("CurrentMouseButton: " + Mouse.getB(), 5, 20);
 		g.drawString("MouseX: " + Mouse.getX() + " MouseY:" +Mouse.getY(), 5, 30);
 		//g.drawString("PlayerX: " +  + " PlayerY: " + , 5, 40); // Broken...
+        //g.drawString("Player Health: 000"); shit aint workin right
 		g.drawString("TPS: " + currentTPS + " FPS: " + currentFPS, 5, 40);
-		if (currentFPS >= 60) g.drawString("Your FPS is great!", 5, 50);
+		if (currentFPS >= 1000) g.drawString("Your FPS is GODLY!!", 5, 50);
+        if (currentFPS >= 60 && currentFPS < 1000) g.drawString("Your FPS is great!", 5, 50);
 		if (currentFPS >= 30 && currentFPS < 60) g.drawString("Your FPS is good", 5, 50);
 		if (currentFPS >= 10 && currentFPS < 30) g.drawString("Your FPS is bad...", 5, 50);
 		if (currentFPS >= 1 && currentFPS < 10) g.drawString("Your FPS is terrible!", 5, 50);
