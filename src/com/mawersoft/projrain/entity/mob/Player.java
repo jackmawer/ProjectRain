@@ -36,6 +36,7 @@ public class Player extends Mob {
 		int xa = 0, ya = 0;
 		if (anim < 7500) anim++; 
 		else anim = 0;
+		//TODO Add sprinting mechanics eg. a toggle key in the key listener and an if statement here
 		if (input.up) ya--;
 		if (input.down) ya++;
 		if (input.left) xa--;

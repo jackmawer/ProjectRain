@@ -77,12 +77,14 @@ public class Game extends Canvas implements Runnable {
 	
 	public synchronized void start() {
 		System.out.println("Hello!");
+		System.out.println("This is Project Rain Version" + ver + " by jack mawer games");
 		running = true;
 		thread = new Thread(this, "Display");
 		thread.start();//Start the main thread
 	}
 	
 	public synchronized void stop() {
+		//This code is unused, and will remain so unless we embed the game into an applet.
 		System.out.println("Goodbye!");
 		running = false;
 		try {
@@ -154,8 +156,8 @@ public class Game extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		//Graphics!
-		//g.setColor(Color.BLACK);//Testing only
-		//g.fillRect(0, 0, getWidth(), getHeight() );//Testing only
+		//g.setColor(Color.BLACK);//Redundant code
+		//g.fillRect(0, 0, getWidth(), getHeight() );//Redundant code
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64); // Don't need it
 		g.drawString("Project Rain by Jack Mawer, Version " + ver, 5, 10);
@@ -163,7 +165,8 @@ public class Game extends Canvas implements Runnable {
 		g.drawString("MouseX: " + Mouse.getX() + " MouseY:" +Mouse.getY(), 5, 30);
 		//g.drawString("PlayerX: " +  + " PlayerY: " + , 5, 40); // Broken...
 		g.drawString("TPS: " + currentTPS + " FPS: " + currentFPS, 5, 40);
-		if (currentFPS >= 60) g.drawString("Your FPS is great!", 5, 50);
+		if (currentFPS >= 1000) g.drawString("Your FPS is FLAMING!", 5, 50);
+		if (currentFPS >= 60 && currentFPS < 1000) g.drawString("Your FPS is great!", 5, 50);
 		if (currentFPS >= 30 && currentFPS < 60) g.drawString("Your FPS is good", 5, 50);
 		if (currentFPS >= 10 && currentFPS < 30) g.drawString("Your FPS is bad...", 5, 50);
 		if (currentFPS >= 1 && currentFPS < 10) g.drawString("Your FPS is terrible!", 5, 50);
