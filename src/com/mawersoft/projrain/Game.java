@@ -160,7 +160,7 @@ public class Game extends Canvas implements Runnable {
 		//g.fillRect(0, 0, getWidth(), getHeight() );//Redundant code
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64); // Don't need it
-		g.drawString("Project Rain by Jack Mawer, Version " + ver, 5, 10);
+		g.drawString("Project Rain by Jack Mawer Games, Version " + ver, 5, 10);
 		g.drawString("CurrentMouseButton: " + Mouse.getB(), 5, 20);
 		g.drawString("MouseX: " + Mouse.getX() + " MouseY:" +Mouse.getY(), 5, 30);
 		//g.drawString("PlayerX: " +  + " PlayerY: " + , 5, 40); // Broken...
