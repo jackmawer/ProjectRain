@@ -37,6 +37,14 @@ public class Player extends Mob {
 		if (anim < 7500) anim++; 
 		else anim = 0;
 		//TODO Add sprinting mechanics eg. a toggle key in the key listener and an if statement here
+		boolean sprinting = true;
+		if (sprinting) {
+			// Do the walk thing twice, therefore doubling the speed
+			if (input.up) ya--;
+			if (input.down) ya++;
+			if (input.left) xa--;
+			if (input.right) xa++;
+		}
 		if (input.up) ya--;
 		if (input.down) ya++;
 		if (input.left) xa--;
