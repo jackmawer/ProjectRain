@@ -14,7 +14,6 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking = false;
-    private int health = 100;
 	
 	private int fireRate = 0;
 
@@ -28,24 +27,28 @@ public class Player extends Mob {
 		this.x = x;
 		this.y = y;
 		this.input = input;
-        health = 100;
 		sprite = Sprite.player_forward;
 		fireRate = WizardProjectile.FIRE_RATE;
 	}
-
-    public int getHealth(){
-        return 100;
-    }
-
+	
 	public void update() {
 		if (fireRate > 0) fireRate--;
 		int xa = 0, ya = 0;
 		if (anim < 7500) anim++; 
 		else anim = 0;
-		if (input.up) ya-=2;
-		if (input.down) ya+=2;
-		if (input.left) xa-=2;
-		if (input.right) xa+=2;
+		//TODO Add sprinting mechanics eg. a toggle key in the key listener and an if statement here
+		boolean sprinting = true;
+		if (sprinting) {
+			// Do the walk thing twice, therefore doubling the speed
+			if (input.up) ya--;
+			if (input.down) ya++;
+			if (input.left) xa--;
+			if (input.right) xa++;
+		}
+		if (input.up) ya--;
+		if (input.down) ya++;
+		if (input.left) xa--;
+		if (input.right) xa++;
 		if (xa != 0 || ya != 0) {
 			move (xa, ya);
 			walking = true;
@@ -121,7 +124,7 @@ public class Player extends Mob {
 		//screen.renderPlayer(xx + 16, yy, Sprite.player1);
 		//screen.renderPlayer(xx, yy + 16, Sprite.player2);
 		//screen.renderPlayer(xx + 16, yy + 16, Sprite.player3);
-
+		
 	}
 	
 }
