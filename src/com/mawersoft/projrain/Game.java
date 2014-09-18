@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
 	private static int width = 300;
 	private static int height = width / 16 * 9;
 	private static int scale = 3;
-	public static String ver = "0.0.5";
+	public static String ver = "0.0.6";
 	//public static String title = "ProjRain";
 	public static String title = "Project Rain "+ver;
 	public int currentFPS;
